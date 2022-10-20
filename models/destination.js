@@ -8,4 +8,4 @@ const DestinationSchema = new Schema({
     description: String 
 });
 
-module.exports = mongoose.model("Destination", DestinationSchema);
+module.exports = mongoose.model("Destination", DestinationSchema); // what goes into the database, model
