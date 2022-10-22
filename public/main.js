@@ -1,5 +1,6 @@
 const KEY = "wtq3TnpbUIM1zklxhd2X6mpOZViWnD-5FrORsZgivWQ";
 
+
 // Starter Function
 displayCachedPosts();
 
@@ -15,11 +16,11 @@ document.querySelector("#btn-submit").addEventListener('click', () => {
         alert("Please complete all required fields.")
     }
     else {
-        document.querySelector("#destination").value = "";
-        document.querySelector("#location").value = "";
-        document.querySelector("#description").value = "";
+        // document.querySelector("#destination").value = "";
+        // document.querySelector("#location").value = "";
+        // document.querySelector("#description").value = "";
 
-        add_post(post_id, title, dest_location, description);
+        // add_post(post_id, title, dest_location, description); // bring this back after troubleshooting
     }
 })
 

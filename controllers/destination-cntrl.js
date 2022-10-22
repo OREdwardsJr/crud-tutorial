@@ -1,8 +1,11 @@
 const { Destination } = require("../models"); // this is an import. it's bringing Destination from models
 
 // CREATE DESTINATION
-const createDestination = (req, res) => {
+const createDestination = async (req, res) => {
+  
   const payload = req.body;
+  console.log(payload);
+
   if (!payload) {
     return res.status(400).json({
       success: false,
@@ -11,6 +14,7 @@ const createDestination = (req, res) => {
   }
 
   const destination = new Destination(payload);
+  
 
   if (!destination) {
     return res.status(400).json({
@@ -19,17 +23,17 @@ const createDestination = (req, res) => {
     });
   }
 
-  
-
-  destination
+  await destination
     .save()
     .then(() => {
-      //res.redirect('/');
-      return res.status(201).json({
-        success: true,
-        id: destination._id,
-        message: "Destination created",
-      });
+      return res.redirect('/');
+      
+      // return res.status(201).json({
+        
+      //   success: true,
+      //   id: destination._id,
+      //   message: "Destination created",
+      // })
     })
     .catch((e) => {
       return res.status(400).json({
