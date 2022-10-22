@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
-app. get('/', (req, res) => {
+app.get('/', (req, res) => {
     db.collection('destinations')
     .find()
     .toArray()
@@ -21,4 +21,5 @@ app. get('/', (req, res) => {
 
 app.use('/api', DestinationRoutes);
 
-app.listen(process.env.PORT, () => console.log(`Listening on Port ${process.env.PORT}`))
+//app.listen(process.env.PORT, () => console.log(`Listening on Port ${process.env.PORT}`))
+app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));

@@ -3,7 +3,6 @@ const { Destination } = require("../models"); // this is an import. it's bringin
 // CREATE DESTINATION
 const createDestination = (req, res) => {
   const payload = req.body;
-
   if (!payload) {
     return res.status(400).json({
       success: false,
@@ -19,15 +18,16 @@ const createDestination = (req, res) => {
       error: "Destination not created",
     });
   }
-
+  
   destination
     .save()
     .then(() => {
-      return res.status(201).json({
-        success: true,
-        id: destination._id,
-        message: "Destination created",
-      });
+      return res.redirect('/');
+      // return res.status(201).json({
+      //   success: true,
+      //   id: destination._id,
+      //   message: "Destination created",
+      // });
     })
     .catch((e) => {
       return res.status(400).json({
@@ -87,6 +87,7 @@ const deleteDestination = (req, res) => {
       success: true,
     });
   });
+  
 };
 
 // UPDATE DESTINATION BY ID
