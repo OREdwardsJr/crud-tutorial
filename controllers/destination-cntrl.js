@@ -18,16 +18,18 @@ const createDestination = (req, res) => {
       error: "Destination not created",
     });
   }
+
   
+
   destination
     .save()
     .then(() => {
-      return res.redirect('/');
-      // return res.status(201).json({
-      //   success: true,
-      //   id: destination._id,
-      //   message: "Destination created",
-      // });
+      //res.redirect('/');
+      return res.status(201).json({
+        success: true,
+        id: destination._id,
+        message: "Destination created",
+      });
     })
     .catch((e) => {
       return res.status(400).json({
