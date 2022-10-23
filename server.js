@@ -13,6 +13,9 @@ const db = require('./db');
 const { DestinationRoutes } = require("./routes");
 const bodyParser = require('body-parser');
 
+
+app.set('view engine', 'ejs');
+
 // express request handlers //
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -22,7 +25,9 @@ app.use(bodyParser.json())
 
 app.use('/api', DestinationRoutes);
 app.use(express.static("public"));
-//app.set('view engine', 'ejs')
+
+app.set('view engine', 'ejs');
+//app.set('views', __dirname +  "/public");
 
 // app.get('/', (req, res) => {
 //     res.sendFile(__dirname + "/public/index.html");
@@ -34,12 +39,15 @@ app.use(express.static("public"));
 // });
 
 
+/* TODO
+RES.SENDFILE AND RES.RENDER ARE SENDING MULTIPLE REQUESTS. 
+MAYBE LOOK INTO HOW TO STOP RES.SENDFILE BEFORE CONTINUING
+*/
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
-
-    db.collection('wishlists').find().toArray()
+     db.collection('wishlists')
+     .find().toArray()
      .then(results => {
-         res.render(__dirname + '/views/index.ejs', { wishlists: results });
+        res.render(__dirname + '/public/index.ejs', { wishlists: results });
     })
      .catch(error => console.log(error));
 });

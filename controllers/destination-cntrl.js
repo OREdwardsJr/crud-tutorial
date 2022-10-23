@@ -4,7 +4,6 @@ const { Destination } = require("../models"); // this is an import. it's bringin
 const createDestination = async (req, res) => {
   
   const payload = req.body;
-  console.log(payload);
 
   if (!payload) {
     return res.status(400).json({

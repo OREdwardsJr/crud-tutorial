@@ -10,7 +10,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/styles.css" type="text/css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -32,13 +32,13 @@
                 <div id="form-body">
                     <div id="content">
                         <form name = "new-post"
-                            id="new-post"
-                            method="post"
-                            action="/api/destination/create"
-                            style="display: grid"
-                            >
+                        id="new-post"
+                        method="post"
+                        action="/api/destination/create"
+                        style="display: grid"
+                        >
                             <label for="destination">Destination name:</label><br>
-                            <input type="text" id="destination" name="destination"required ><br>
+                            <input type="text" id="destination" name="destination" required><br>
                             
                             <label for="location">Location:</label><br>
                             <input type="text" id="location" name="location" required><br>
@@ -47,24 +47,41 @@
                             <input type="url" id="photo" name="photo"><br>
 
                             <label for="description">Description:</label><br>
-                            <input type="text" id="description" name="description" required><br>
+                            <input type="text" id="description" name="description"><br>
 
                             <button type="submit" id="btn-submit">Submit</button> 
-                        </form> <!--onclick="return false;"-->
+                        </form > <!--onclick="return false;"-->
                     </div>
+                    <!--<%= wishlists %>-->
                 </div>
                 <div id="display-main-content">
                     <div id="title">
                         <h2 style="width: 20vw;">My WishList</h2>
                     </div>
                     <div id="posts-content">
+                        <% wishlists.forEach(function(wishlist) { %>
+                            <div class="containers">
+                                <div class="image-section">
+
+                                </div>
+                                <div class="image-info">
+                                    <h1><%= wishlist.destination %></h1>
+                                    <h3><%= wishlist.location %></h3>
+                                    <p><%= wishlist.description %></p>
+                                    <div class="img-btns">
+                                        <button class="btn-edit">Edit</button>
+                                        <button class="btn-remove">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
                         
                     </div>
                 </div>
             </div>
         </div>
-        <script src="main.js" type="module" async defer></script> <!--type="module"-->
+        <script src="/main.js" type="module" async defer></script> <!--type="module"-->
     </body>
     <footer>
-    </footer>
+   
 </html>

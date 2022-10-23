@@ -21,5 +21,4 @@ app.get('/', (req, res) => {
 
 app.use('/api', DestinationRoutes);
 
-//app.listen(process.env.PORT, () => console.log(`Listening on Port ${process.env.PORT}`))
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
