@@ -8,7 +8,7 @@ TODO
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 12907;
 const db = require('./db');
 const { DestinationRoutes } = require("./routes");
 const bodyParser = require('body-parser');
