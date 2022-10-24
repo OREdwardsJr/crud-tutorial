@@ -29,28 +29,28 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 //app.set('views', __dirname +  "/public");
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
-    db.collection('wishlists')
-    .find()
-    .toArray()
-    .then(results => res.send(results))
-    .catch(e => console.error("We have an error: ", e));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + "/public/index.html");
+//     db.collection('wishlists')
+//     .find()
+//     .toArray()
+//     .then(results => res.send(results))
+//     .catch(e => console.error("We have an error: ", e));
+// });
 
 
 /* TODO
 RES.SENDFILE AND RES.RENDER ARE SENDING MULTIPLE REQUESTS. 
 MAYBE LOOK INTO HOW TO STOP RES.SENDFILE BEFORE CONTINUING
 */
-// app.get('/', (req, res) => {
-//      db.collection('wishlists')
-//      .find().toArray()
-//      .then(results => {
-//         res.render(__dirname + '/public/index.ejs', { wishlists: results });
-//     })
-//      .catch(error => console.log(error));
-// });
+app.get('/', (req, res) => {
+     db.collection('wishlists')
+     .find().toArray()
+     .then(results => {
+        res.render(__dirname + '/public/index.ejs', { wishlists: results });
+    })
+     .catch(error => console.log(error));
+});
 
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
 
