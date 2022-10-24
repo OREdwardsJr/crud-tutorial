@@ -54,15 +54,15 @@ function activateEditButtons() { // obj is expected to be .container
         } else { // description
             property = "description";
         };
-        button.addEventListener('click', (e) => editContents(e.target, property), false)
+        button.addEventListener('click', (e) => editContents(e property), false)
     });
 };
 
 // edit post
 function editContents(obj, property) { // obj is expected to be .btn-edit
-    console.log('hey')
+    obj.preventDefault();
     // const declaration
-    const obj_container = obj.parentNode.parentNode.parentNode; 
+    const obj_container = obj.target.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     console.log(obj_id);
     const updatedContent = prompt("Enter desired update");
