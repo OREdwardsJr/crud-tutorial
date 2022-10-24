@@ -91,8 +91,9 @@ function activateRemoveButtons() { // obj is expected to be .container
 };
 
 function removeEntry(obj) { // obj is expected to be .btn-remove node
-    const parent_node = obj.parentNode.parentNode;
     console.log(obj);
+    const parent_node = obj.parentNode.parentNode;
+    
 
     // $.ajax({
     //     url: `/api/destination/delete/${parent_node.dataset.db_id}`,
