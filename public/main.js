@@ -130,6 +130,7 @@ async function unsplashAPICall(url) {
 }
 
 function editContents(obj) {
+    
     // const declaration
     const obj_container = obj.parentNode.parentNode.parentNode; 
     const image_section = obj_container.children[0]; // .containers.image-section
@@ -143,8 +144,8 @@ function editContents(obj) {
     image_info.children[1].textContent = dest_location; 
     image_info.children[2].textContent = description;
 
-    loadImg(image_section.firstChild, destination, false);
-    storePost(obj_container.id.split('-')[1], destination, dest_location, description);
+    // loadImg(image_section.firstChild, destination, false);
+    // storePost(obj_container.id.split('-')[1], destination, dest_location, description);
 }
 
 function removeEntry(obj) {

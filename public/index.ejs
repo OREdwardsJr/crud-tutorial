@@ -11,6 +11,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/styles.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -41,10 +42,7 @@
                             <input type="text" id="destination" name="destination" required><br>
                             
                             <label for="location">Location:</label><br>
-                            <input type="text" id="location" name="location" required><br>
-
-                            <label for="photo">Photo:</label><br>
-                            <input type="url" id="photo" name="photo"><br>
+                            <input type="text" id="location" name="location"><br>
 
                             <label for="description">Description:</label><br>
                             <input type="text" id="description" name="description"><br>
@@ -59,19 +57,32 @@
                         <h2 style="width: 20vw;">My WishList</h2>
                     </div>
                     <div id="posts-content">
+                        <% let post_id = 0 %>
                         <% wishlists.forEach(function(wishlist) { %>
-                            <div class="containers">
+                            <div class="containers" data-db_id=<%= wishlist._id %> >
                                 <div class="image-section">
-
+                                    <!--JS loads images-->
                                 </div>
-                                <div class="image-info">
-                                    <h1><%= wishlist.destination %></h1>
-                                    <h3><%= wishlist.location %></h3>
-                                    <p><%= wishlist.description %></p>
-                                    <div class="img-btns">
-                                        <button class="btn-edit">Edit</button>
-                                        <button class="btn-remove">Remove</button>
+                                <form name="edit-post"
+                                 id="edit-post"
+                                 class ="image-info"
+                                 method="PUT"
+                                 action="/api/destination/update">
+                                    <div class="text-post-content">
+                                        <h1 id="destination"><%= wishlist.destination %></h1>
+                                        <button class="btn-edit btn-edit-destination fa fa-pencil"></button>
                                     </div>
+                                    <div class="text-post-content">
+                                        <h3 id="location"><%= wishlist.location %></h3>
+                                        <button class="btn-edit btn-edit-location fa fa-pencil"></button>
+                                    </div>
+                                    <div class="text-post-content">
+                                        <p id="description"><%= wishlist.description %></p>
+                                        <button class="btn-edit btn-edit-description fa fa-pencil"></button>
+                                    </div>
+                                </form>
+                                <div class="img-btns">
+                                    <button class="btn-remove">Remove</button>
                                 </div>
                             </div>
                         <% }) %>
@@ -80,7 +91,9 @@
                 </div>
             </div>
         </div>
-        <script src="/main.js" type="module" async defer></script> <!--type="module"-->
+        <script src="/main2.js" type="module" async defer></script> 
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
     </body>
     <footer>
    

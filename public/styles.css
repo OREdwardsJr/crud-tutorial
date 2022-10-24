@@ -72,6 +72,12 @@
     box-shadow: 3px 0px 20px -5px #e8e3e3;
 }
 
+#landing-content #main-section #display-main-content #posts-content .containers .image-section img {
+    object-fit: fill;
+    width: 100%;
+    height: 97%;
+}
+
 #landing-content #main-section #display-main-content #posts-content .containers .image-info {
     display: flex;
     flex-direction: column;
@@ -81,18 +87,25 @@
     width: 95%;
 }
 
-#landing-content #main-section #display-main-content #posts-content .containers .image-section img {
-    object-fit: fill;
-    width: 100%;
-    height: 97%;
+#landing-content #main-section #display-main-content #posts-content .containers .image-info .btn-edit {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
 }
 
-#landing-content #main-section #display-main-content #posts-content .containers .image-info .img-btns {
+#landing-content #main-section #display-main-content #posts-content .containers .image-info .text-post-content {
+    display: flex;
+    gap: 0.5vw;
+}
+
+#landing-content #main-section #display-main-content #posts-content .containers .image-info .text-post-content .img-btns {
     display: flex;
     gap: 1vw;
 }
 
-#landing-content #main-section #display-main-content #posts-content .containers .image-info .img-btns button {
+#landing-content #main-section #display-main-content #posts-content .containers .image-info .text-post-content .img-btns button {
     width: auto;
     /* height: 4vh; */
     font-size: larger;
