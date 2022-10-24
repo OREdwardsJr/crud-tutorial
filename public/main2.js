@@ -66,21 +66,27 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
 
+    const data = JSON.stringify({
+        property: updatedContent
+    });
+
     obj.previousElementSibling.textContent = updatedContent;
     
-    /* once user clicks outside of input textbox do the below */
-    // $.ajax({ // check this call for bugs as needed. JS doesnt autofill for .ajax but does for other functions starting with .ajax
-    //     method: "PUT",
-    //     url: `/api/destination/update/${obj_id}`,
-    //     data: { property: updatedContent },
-    // }).done(() => {
-    //     console.log(`${obj_id} has been edited.`)
-    // });
-        
-    if (property === "destination") {
-        loadImg(obj_container);
+    fetch(`/api/destination/update/${obj_id}`, {
+        method: 'PUT', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     };
-};
 
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
