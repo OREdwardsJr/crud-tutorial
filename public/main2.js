@@ -3,7 +3,7 @@ const KEY = "9F6mguTnJtDRAlfzGfzrDcZN_rRWYq3-Y9f6-obW80Y";
 
 // Start app
 loadImgs();
-//addEventListeners();
+addEventListeners();
 
 // Functions
 function loadImgs() {
@@ -37,7 +37,7 @@ function loadImg(obj) { // obj should be the parent ".container" node
 };
 
 function addEventListeners() {
-    activateEditButtons();
+    //activateEditButtons();
     activateRemoveButtons();
 
     document.querySelectorAll('.btn-remove').forEach(button => {
