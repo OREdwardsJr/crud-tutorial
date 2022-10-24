@@ -39,14 +39,11 @@ app.set('view engine', 'ejs');
 // });
 
 
-/* TODO
-RES.SENDFILE AND RES.RENDER ARE SENDING MULTIPLE REQUESTS. 
-MAYBE LOOK INTO HOW TO STOP RES.SENDFILE BEFORE CONTINUING
-*/
 app.get('/', (req, res) => {
      db.collection('wishlists')
      .find().toArray()
      .then(results => {
+        console.log('hey');
         res.render(__dirname + '/public/index.ejs', { wishlists: results });
     })
      .catch(error => console.log(error));
