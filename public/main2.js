@@ -37,8 +37,8 @@ function loadImg(obj) { // obj should be the parent ".container" node
 };
 
 function addEventListeners() {
-    //activateEditButtons();
-    activateRemoveButtons();
+    activateEditButtons();
+    //activateRemoveButtons();
 
     document.querySelectorAll('.btn-remove').forEach(button => {
         button.addEventListener('click', removeEntry(button));
