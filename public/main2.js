@@ -85,12 +85,12 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
     
-    // removeBtns.forEach(button => {
-    //     button.addEventListener('click', removeEntry(button));
-    // });
+    removeBtns.forEach(button => {
+        button.addEventListener('click', removeEntry);
+    });
 };
 
-function removeEntry(obj) { // obj is expected to be .btn-remove node
+function removeEntry() { // obj is expected to be .btn-remove node
     const parent_node = obj.parentNode.parentNode;
 
     // $.ajax({
