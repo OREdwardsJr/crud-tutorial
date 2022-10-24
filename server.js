@@ -27,17 +27,6 @@ app.use('/api', DestinationRoutes);
 app.use(express.static("public"));
 
 app.set('view engine', 'ejs');
-//app.set('views', __dirname +  "/public");
-
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + "/public/index.html");
-//     db.collection('wishlists')
-//     .find()
-//     .toArray()
-//     .then(results => res.send(results))
-//     .catch(e => console.error("We have an error: ", e));
-// });
-
 
 app.get('/', (req, res) => {
      db.collection('wishlists')
@@ -51,9 +40,19 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
 
 
-
-
 /*
+
+//app.set('views', __dirname +  "/public");
+
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + "/public/index.html");
+//     db.collection('wishlists')
+//     .find()
+//     .toArray()
+//     .then(results => res.send(results))
+//     .catch(e => console.error("We have an error: ", e));
+// });
+
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
