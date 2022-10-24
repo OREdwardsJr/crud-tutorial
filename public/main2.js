@@ -67,6 +67,8 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     console.log(obj_id);
     const updatedContent = prompt("Enter desired update");
 
+    debugger;
+    
     const data = {
         property: updatedContent
     };
