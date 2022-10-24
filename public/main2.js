@@ -38,11 +38,11 @@ function loadImg(obj) { // obj should be the parent ".container" node
 
 function addEventListeners() {
     activateEditButtons();
-    //activateRemoveButtons();
+    activateRemoveButtons();
 
-    document.querySelectorAll('.btn-remove').forEach(button => {
-        button.addEventListener('click', removeEntry(button));
-    });
+    // document.querySelectorAll('.btn-remove').forEach(button => {
+    //     button.addEventListener('click', removeEntry(button));
+    // });
 };
 
 function activateEditButtons() { // obj is expected to be .container
