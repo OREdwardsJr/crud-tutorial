@@ -1,5 +1,5 @@
 // const { Destination } = require("../models");
-const KEY = "wtq3TnpbUIM1zklxhd2X6mpOZViWnD-5FrORsZgivWQ";
+const KEY = "9F6mguTnJtDRAlfzGfzrDcZN_rRWYq3-Y9f6-obW80Y";
 
 // Start app
 loadImgs();
@@ -8,7 +8,6 @@ addEventListeners();
 // Functions
 function loadImgs() {
     const containers = document.querySelectorAll(".containers");
-
     containers.forEach((obj) => {
         loadImg(obj);
     });
@@ -16,6 +15,7 @@ function loadImgs() {
 
 function loadImg(obj) { // obj should be the parent ".container" node
     const searchKey = obj.children[1].children[0].children[0].textContent; // #destination.textContent
+
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
     //const url = "";
 

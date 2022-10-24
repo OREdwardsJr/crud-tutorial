@@ -43,7 +43,6 @@ app.get('/', (req, res) => {
      db.collection('wishlists')
      .find().toArray()
      .then(results => {
-        console.log('hey');
         res.render(__dirname + '/public/index.ejs', { wishlists: results });
     })
      .catch(error => console.log(error));
