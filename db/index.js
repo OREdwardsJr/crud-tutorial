@@ -8,7 +8,7 @@ require("dotenv").config();
 // .catch(e => console.error("Database not connected: ", e));
 
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost:27017/wishlist',
+    process.env.DATABASE || 'mongodb://localhost:27017/wishlist',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
