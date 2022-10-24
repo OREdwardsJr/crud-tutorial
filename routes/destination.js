@@ -6,7 +6,7 @@ const herokuLine = 'vacation-wishlist.herokuapp.com'
 
 // create
 //router.post('/destination/create', createDestination);
-router.post(herokuLine = '/destination/create', createDestination);
+router.post(herokuLine + '/destination/create', createDestination);
 
 // delete
 //router.delete("/destination/delete/:id", deleteDestination);
