@@ -86,12 +86,13 @@ function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
     
     removeBtns.forEach(button => {
-        button.addEventListener('click', removeEntry);
+        button.addEventListener('click', (elem) => removeEntry(elem));
     });
 };
 
-function removeEntry() { // obj is expected to be .btn-remove node
+function removeEntry(obj) { // obj is expected to be .btn-remove node
     const parent_node = obj.parentNode.parentNode;
+    console.log(obj);
 
     // $.ajax({
     //     url: `/api/destination/delete/${parent_node.dataset.db_id}`,
