@@ -71,7 +71,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         property: updatedContent
     };
 
-    obj.previousElementSibling.textContent = updatedContent;
+    
     
     fetch(`/api/destination/update/${obj_id}`, {
         method: 'PUT', // or 'PUT'
@@ -82,12 +82,14 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
+            if (!!data) {
+                //obj.previousElementSibling.textContent = updatedContent;
+                location.reload();
+            }
         });
     };
+
+    
 
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
