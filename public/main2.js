@@ -66,9 +66,9 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
 
-    const data = JSON.stringify({
+    const data = {
         property: updatedContent
-    });
+    };
 
     obj.previousElementSibling.textContent = updatedContent;
     
@@ -77,7 +77,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         headers: {
           'Content-Type': 'application/json',
         },
-        body: data,
+        body: JSON.stringify(data),
       })
         .then((response) => response.json())
         .then((data) => {
