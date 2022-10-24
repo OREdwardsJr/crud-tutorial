@@ -86,7 +86,7 @@ function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
     
     removeBtns.forEach(button => {
-        button.addEventListener('click', (elem) => removeEntry(elem));
+        button.addEventListener('click', (elem) => removeEntry(elem.target));
     });
 };
 
