@@ -3,7 +3,7 @@ const KEY = "9F6mguTnJtDRAlfzGfzrDcZN_rRWYq3-Y9f6-obW80Y";
 
 // Start app
 loadImgs();
-addEventListeners();
+//addEventListeners();
 
 // Functions
 function loadImgs() {
