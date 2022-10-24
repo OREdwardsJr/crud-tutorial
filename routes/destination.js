@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Destination } = require("./../models");
 const { createDestination, getDestinations, getDestination, deleteDestination, updateDestination } = require("./../controllers/destination-cntrl");
-const herokuLine = 'https://vacation-wishlist.herokuapp.com/'
+const herokuLine = 'vacation-wishlist.herokuapp.com'
 
 // create
 //router.post('/destination/create', createDestination);
