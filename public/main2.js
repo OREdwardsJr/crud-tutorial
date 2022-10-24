@@ -68,7 +68,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     const updatedContent = prompt("Enter desired update");
 
     debugger;
-    
+
     const data = {
         property: updatedContent
     };
@@ -90,8 +90,6 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
             }
         });
     };
-
-    
 
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
