@@ -39,10 +39,6 @@ function loadImg(obj) { // obj should be the parent ".container" node
 function addEventListeners() {
     activateEditButtons();
     activateRemoveButtons();
-
-    // document.querySelectorAll('.btn-remove').forEach(button => {
-    //     button.addEventListener('click', removeEntry(button));
-    // });
 };
 
 function activateEditButtons() { // obj is expected to be .container
@@ -89,9 +85,9 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
     
-    removeBtns.forEach(button => {
-        button.addEventListener('click', removeEntry(button));
-    });
+    // removeBtns.forEach(button => {
+    //     button.addEventListener('click', removeEntry(button));
+    // });
 };
 
 function removeEntry(obj) { // obj is expected to be .btn-remove node
