@@ -19,14 +19,14 @@ function loadImg(obj) { // obj should be the parent ".container" node
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
     //const url = "";
 
-    unsplashAPICall(url).then(data => {
-        let img_result = data.urls.thumb;
-        let image_element = document.createElement('img');
+    // unsplashAPICall(url).then(data => {
+    //     let img_result = data.urls.thumb;
+    //     let image_element = document.createElement('img');
         
-        image_element.src = img_result;
+    //     image_element.src = img_result;
 
-        obj.children[0].appendChild(image_element);
-    });
+    //     obj.children[0].appendChild(image_element);
+    // });
 
     // inner functions
     async function unsplashAPICall(url) {
@@ -37,7 +37,7 @@ function loadImg(obj) { // obj should be the parent ".container" node
 };
 
 function addEventListeners() {
-    // activateEditButtons();
+    activateEditButtons();
     // activateRemoveButtons();
 
     // document.querySelectorAll('.btn-remove').forEach(button => {
