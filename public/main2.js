@@ -43,18 +43,8 @@ function addEventListeners() {
 
 function activateEditButtons() { // obj is expected to be .container
     const editBtns = document.querySelectorAll(".btn-edit");
-    const buttonClassPrefix = "btn-edit-"
-    let property;
 
      editBtns.forEach(button => {
-        // if (button.classList.contains("btn-edit-destination")) {
-        //     property = "destination";
-        // } else if (button.classList.contains("btn-edit-location")) {
-        //     property = "location";
-        // } else { // description
-        //     property = "description";
-        // };
-        // console.log(property);
         button.addEventListener('click', (e) => editContents(e), false)
     });
 };
@@ -62,28 +52,25 @@ function activateEditButtons() { // obj is expected to be .container
 // edit post
 function editContents(obj) { // obj is expected to be .btn-edit
     obj.preventDefault();
-
-    // const declaration
-    obj = obj.target;
+    
+    const objTarget = obj.target;
 
     let property;
 
-    const obj_container = obj.parentNode.parentNode.parentNode; 
+    const obj_container = objTarget.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
     const updatedField = { };
 
-    if (obj.classList.contains("btn-edit-destination")) {
+    if (objTarget.classList.contains("btn-edit-destination")) {
         property = "destination";
-    } else if (obj.classList.contains("btn-edit-location")) {
+    } else if (objTarget.classList.contains("btn-edit-location")) {
         property = "location";
     } else { // description
         property = "description";
     };
 
-    
     updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
-    console.log(updatedField);
 
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
@@ -95,11 +82,11 @@ function editContents(obj) { // obj is expected to be .btn-edit
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
-                obj.previousElementSibling.textContent = updatedContent;
+                objTarget.previousElementSibling.textContent = updatedContent;
             };
         });
     
-    if (property == 'destination') loadImg(obj_container);
+    if (property === 'destination') loadImg(obj_container);
     };
  
 function activateRemoveButtons() { // obj is expected to be .container
