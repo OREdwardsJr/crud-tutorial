@@ -59,33 +59,27 @@ function activateEditButtons() { // obj is expected to be .container
 };
 
 // edit post
-function editContents(obj, updatedData) { // obj is expected to be .btn-edit
+function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
     // const declaration
     const obj_container = obj.target.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
-    const property = updatedData;
+    const data = {};
 
-    const data = {
-        property: updatedContent
-    };
-
+    data[property] = updatedContent;
     
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            description: updatedContent}),
+        body: JSON.stringify({ data }),
       })
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
-                console.log(property, updatedContent, obj_id);
-                //obj.previousElementSibling.textContent = updatedContent;
-                //location.reload();
+                obj.previousElementSibling.textContent = updatedContent;
             }
         });
     };
