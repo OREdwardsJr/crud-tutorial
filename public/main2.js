@@ -47,7 +47,7 @@ function activateEditButtons() { // obj is expected to be .container
     let property;
 
     editBtns.forEach(button => {
-        console.log(button);
+        console.log(button.classList.contains(buttonClassPrefix));
         if (button.classList.contains(buttonClassPrefix + "destination")) {
             property = "destination";
         } else if (button.classList.contains(buttonClassPrefix + "location")) {
