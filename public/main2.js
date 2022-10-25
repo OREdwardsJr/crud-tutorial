@@ -80,8 +80,8 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
-                console.log(obj);
-                //obj.previousElementSibling.textContent = updatedContent;
+                console.log(data);
+                obj.previousElementSibling.textContent = updatedContent;
             }
         });
     };
