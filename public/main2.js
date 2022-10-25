@@ -61,7 +61,7 @@ function activateEditButtons() { // obj is expected to be .container
 // edit post
 function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
-
+    console.log(property);
     // const declaration
     obj = obj.target;
     const obj_container = obj.parentNode.parentNode.parentNode; 
@@ -71,8 +71,6 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
 
     updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
     
-    console.log(updatedField);
-
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
         headers: {
