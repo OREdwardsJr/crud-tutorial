@@ -63,7 +63,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
     // const declaration
     obj = obj.target;
-    const obj_container = objparentNode.parentNode.parentNode; 
+    const obj_container = obj.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
     const data = {};
