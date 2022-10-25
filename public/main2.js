@@ -29,7 +29,7 @@ function loadImg(obj, overrideDefault=false) { // obj should be the parent ".con
 
             obj.children[0].appendChild(image_element);
         } else {
-            obj.children[0][0].src = img_result;
+            obj.children[0].children[0].src = img_result;
         }
     });
 
