@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { Destination } = require("./../models");
 const { createDestination, getDestinations, getDestination, deleteDestination, updateDestination } = require("./../controllers/destination-cntrl");
 
 // create
