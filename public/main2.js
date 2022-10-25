@@ -69,7 +69,6 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     const updatedField = {};
 
     updatedField[property] = updatedContent;
-    console.log(data);
     
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
