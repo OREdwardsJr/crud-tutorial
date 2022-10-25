@@ -78,8 +78,7 @@ function editContents(obj, updatedData) { // obj is expected to be .btn-edit
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            _id: obj_id,
-            property: updatedContent}),
+            description: updatedContent}),
       })
         .then((response) => response.json())
         .then((data) => {
