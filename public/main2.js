@@ -64,10 +64,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     // const declaration
     const obj_container = obj.target.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
-    console.log(obj_id);
     const updatedContent = prompt("Enter desired update");
-
-    debugger;
 
     const data = {
         property: updatedContent
@@ -76,11 +73,11 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     
     
     fetch(`/api/destination/update/${obj_id}`, {
-        method: 'PUT', // or 'PUT'
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({property: updatedContent}),
       })
         .then((response) => response.json())
         .then((data) => {
