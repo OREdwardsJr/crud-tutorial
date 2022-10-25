@@ -59,12 +59,13 @@ function activateEditButtons() { // obj is expected to be .container
 };
 
 // edit post
-function editContents(obj, property) { // obj is expected to be .btn-edit
+function editContents(obj, updatedData) { // obj is expected to be .btn-edit
     obj.preventDefault();
     // const declaration
     const obj_container = obj.target.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
+    const property = updatedData;
 
     const data = {
         property: updatedContent
@@ -76,7 +77,9 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({property: updatedContent}),
+        body: JSON.stringify({
+            _id: obj_id,
+            property: updatedContent}),
       })
         .then((response) => response.json())
         .then((data) => {
