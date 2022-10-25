@@ -47,9 +47,9 @@ function activateEditButtons() { // obj is expected to be .container
     let property;
 
      editBtns.forEach(button => {
-        if (button.classList.contains(buttonClassPrefix + "destination")) {
+        if (button.classList.contains("btn-edit-destination")) {
             property = "destination";
-        } else if (button.classList.contains(buttonClassPrefix +"location")) {
+        } else if (button.classList.contains("btn-edit-location")) {
             property = "location";
         } else { // description
             property = "description";
@@ -62,6 +62,7 @@ function activateEditButtons() { // obj is expected to be .container
 function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
     console.log(property);
+
     // const declaration
     obj = obj.target;
     const obj_container = obj.parentNode.parentNode.parentNode; 
@@ -71,6 +72,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
 
     updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
     
+
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
         headers: {
