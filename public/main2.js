@@ -52,6 +52,7 @@ function activateEditButtons() { // obj is expected to be .container
         } else if (button.classList.contains(buttonClassPrefix + "location")) {
             property = "location";
         } else { // description
+            console.log(button.classList);
             property = "description";
         };
         button.addEventListener('click', (e) => editContents(e, property), false)
