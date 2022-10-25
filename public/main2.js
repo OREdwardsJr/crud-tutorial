@@ -70,7 +70,6 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         property: updatedContent
     };
 
-    console.log(data, property, updatedContent);
     
     fetch(`/api/destination/update/${obj_id}`, {
         method: 'PUT',
@@ -82,6 +81,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
+                console.log(property, updatedContent);
                 //obj.previousElementSibling.textContent = updatedContent;
                 //location.reload();
             }
