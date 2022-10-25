@@ -1,168 +1,115 @@
-const KEY = "wtq3TnpbUIM1zklxhd2X6mpOZViWnD-5FrORsZgivWQ";
+const KEY = "9F6mguTnJtDRAlfzGfzrDcZN_rRWYq3-Y9f6-obW80Y";
 
+// Start app
+loadImgs();
+addEventListeners();
 
-// Starter Function
-displayCachedPosts();
-
-// Event Listeners
-document.querySelector("#btn-submit").addEventListener('click', () => {
-    const post_id = localStorage.getItem('entries');
-    const title = document.querySelector("#destination").value;
-    const dest_location = document.querySelector("#location").value;
-    const description = document.querySelector("#description").value;
-
-    // validation
-    if (title == "" || dest_location == "") {
-        alert("Please complete all required fields.")
-    }
-    else {
-        // document.querySelector("#destination").value = "";
-        // document.querySelector("#location").value = "";
-        // document.querySelector("#description").value = "";
-
-        // add_post(post_id, title, dest_location, description); // bring this back after troubleshooting
-    }
-})
-
-// Business Functions
-function add_post(post_id, title, dest_location, description ) {
-    storePost(post_id, title, dest_location, description);
-    displayPost(localStorage.getItem(post_id));
-
-    let entry = parseInt(post_id) + 1;
-    localStorage.setItem('entries', entry); // Increase entries id by 1
-}
-
-function storePost(post_id, title, dest_location, description) {
-    const new_entry = JSON.stringify({
-        'title': title,
-        'location': dest_location,
-        'imageUrl': "false",
-        'description': description,
-        // 'post_id': post_id // this can be the secondary id within the db
+// Functions
+function loadImgs() {
+    const containers = document.querySelectorAll(".containers");
+    containers.forEach((obj) => {
+        loadImg(obj);
     });
+};
 
-    localStorage.setItem(post_id, new_entry);
-}
+function loadImg(obj, overrideDefault=false, description=null) { // obj should be the parent ".container" node
+    let searchKey = description || obj.children[1].children[0].children[0].textContent; // #destination.textContent
 
-function displayLocalStorage() { 
-    for (var i = 0; i < localStorage.getItem('entries'); i++) {
-        if (localStorage.getItem(i) === null) continue;
+    const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
 
-        var cached_post = localStorage.getItem(i);
-        
-        displayPost(cached_post); 
-    }
-}
+    // unsplashAPICall(url).then(data => {
+    //     let img_result = data.urls.thumb;
 
-function displayPost(postObj) { // cached is tracking whether 
-    // declare variables
-    const post = JSON.parse(postObj);
-    const postsDiv = document.querySelector("#posts-content");
-    const containersDiv = createDiv();
-    const imageSectionDiv = createDiv();
-    const imageInfo = createDiv();
-    const titleDiv = document.createElement("h1");
-    const locationDiv = document.createElement("h3");
-    const contentPara = document.createElement("p");
-    const buttonsDiv = createDiv();
-    const editBtn = document.createElement("button");
-    const removeBtn = document.createElement("button");
-
-    // add class
-    containersDiv.classList.add("containers");
-    imageSectionDiv.classList.add("image-section");
-    imageInfo.classList.add("image-info");
-    buttonsDiv.classList.add("img-btns");
-    editBtn.classList.add("btn-edit");
-    removeBtn.classList.add("btn-remove");
+    //     if (!overrideDefault) {
+    //         let image_element = document.createElement('img');
             
-    // change textContent
-    titleDiv.textContent = post.title;
-    locationDiv.textContent = post.dest_location;
-    contentPara.textContent = post.description;
-    editBtn.textContent = "Edit";
-    removeBtn.textContent = "Remove";
+    //         image_element.src = img_result;
 
-    // add id
-    containersDiv.id = "container-" + post.post_id;
+    //         obj.children[0].appendChild(image_element);
+    //     } else {
+    //         obj.children[0].children[0].src = img_result;
+    //     }
+    // });
 
-    // appendChild
-    buttonsDiv.appendChild(editBtn);
-    buttonsDiv.appendChild(removeBtn);
-    imageInfo.appendChild(titleDiv);
-    imageInfo.appendChild(locationDiv);
-    imageInfo.appendChild(contentPara);
-    imageInfo.appendChild(buttonsDiv);
-    containersDiv.appendChild(imageSectionDiv);
-    containersDiv.appendChild(imageInfo);
-    postsDiv.appendChild(containersDiv);
+    // inner functions
+    async function unsplashAPICall(url) {
+        const request = await fetch(url);
+        const data = await request.json();
+        return data;
+    };
+};
 
-    // add eventListener
-    editBtn.addEventListener('click', (e) => editContents(e.target))
-    removeBtn.addEventListener('click', (e) => removeEntry(e.target))
+function addEventListeners() {
+    activateEditButtons();
+    activateRemoveButtons();
+};
 
-    // function calls
-    loadImg(imageSectionDiv, post.title, true);
-}
+function activateEditButtons() { // obj is expected to be .container
+    const editBtns = document.querySelectorAll(".btn-edit");
 
-function loadImg(obj, search, new_post) {
-    const url = `https://api.unsplash.com/photos/random?query=${search}&per_page=50&page=1&client_id=${KEY}`;
-    //const url = "";
+     editBtns.forEach(button => {
+        button.addEventListener('click', (e) => editContents(e), false)
+    });
+};
 
-    unsplashAPICall(url).then(data => {
-        let img_result = data.urls.thumb;
-            if (new_post) {
-                let image_element = document.createElement('img');
-                image_element.src = img_result;
-                obj.appendChild(image_element);
-            }
-            else { // if user is editing post - doesn't need new img element
-                obj.src = img_result;
-            }
-        })
-}
-
-async function unsplashAPICall(url) {
-    const request = await fetch(url);
-    const data = await request.json();
-    return data;
-}
-
-function editContents(obj) {
+// edit post
+function editContents(obj) { // obj is expected to be .btn-edit
+    obj.preventDefault();
     
-    // const declaration
-    const obj_container = obj.parentNode.parentNode.parentNode; 
-    const image_section = obj_container.children[0]; // .containers.image-section
-    const image_info = obj_container.children[1];    // . containers.image-info
-    const destination = prompt("Enter name of attraction");
-    const dest_location = prompt("Enter location of attraction"); 
-    const description = prompt("Enter description");
+    let property;
 
+    const objTarget = obj.target;
+    const obj_container = objTarget.parentNode.parentNode.parentNode; 
+    const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
+    const updatedContent = prompt("Enter desired update");
+    const updatedField = { };
+
+    if (objTarget.classList.contains("btn-edit-destination")) {
+        property = "destination";
+    } else if (objTarget.classList.contains("btn-edit-location")) {
+        property = "location";
+    } else { // description
+        property = "description";
+    };
+
+    updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
+
+    fetch('/api/destination/update/' + obj_id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedField),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+            if (!!data) {
+                objTarget.previousElementSibling.textContent = updatedContent;
+            };
+        });
     
-    image_info.children[0].textContent = destination
-    image_info.children[1].textContent = dest_location; 
-    image_info.children[2].textContent = description;
-
-    // loadImg(image_section.firstChild, destination, false);
-    // storePost(obj_container.id.split('-')[1], destination, dest_location, description);
-}
-
-function removeEntry(obj) {
-    const parent_node = obj.parentNode.parentNode.parentNode;
-    parent_node.remove(); // parent container of post
+    if (property === 'destination') loadImg(obj_container, true, updatedContent);
+};
+ 
+function activateRemoveButtons() { // obj is expected to be .container
+    const removeBtns = document.querySelectorAll(".btn-remove");
     
-    localStorage.removeItem(parent_node.id.split('-')[1]);
-    let new_num = parseInt(localStorage.getItem('entries')) - 1;
-    localStorage.setItem('entries',  new_num);
-}
+    removeBtns.forEach(button => {
+        button.addEventListener('click', (elem) => removeEntry(elem.target));
+    });
+};
 
-// Helper Functions
-function displayCachedPosts() {
-    if (localStorage.length === 0) { localStorage.setItem("entries", "0") }
-    else onload = () => { displayLocalStorage() }
-}
+function removeEntry(obj) { // obj is expected to be .btn-remove node
+    const parent_node = obj.parentNode.parentNode;
+    const obj_id = parent_node.dataset.db_id;
+    
+    fetch('/api/destination/delete/' + obj_id, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json());
 
-function createDiv() {
-    return document.createElement("div");
-}
+    parent_node.remove();
+};
