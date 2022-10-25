@@ -15,24 +15,22 @@ function loadImgs() {
 
 function loadImg(obj, overrideDefault=false, description=null) { // obj should be the parent ".container" node
     let searchKey = description || obj.children[1].children[0].children[0].textContent; // #destination.textContent
-    console.log(searchKey);
 
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
-    //const url = "";
 
-    unsplashAPICall(url).then(data => {
-        let img_result = data.urls.thumb;
+    // unsplashAPICall(url).then(data => {
+    //     let img_result = data.urls.thumb;
 
-        if (!overrideDefault) {
-            let image_element = document.createElement('img');
+    //     if (!overrideDefault) {
+    //         let image_element = document.createElement('img');
             
-            image_element.src = img_result;
+    //         image_element.src = img_result;
 
-            obj.children[0].appendChild(image_element);
-        } else {
-            obj.children[0].children[0].src = img_result;
-        }
-    });
+    //         obj.children[0].appendChild(image_element);
+    //     } else {
+    //         obj.children[0].children[0].src = img_result;
+    //     }
+    // });
 
     // inner functions
     async function unsplashAPICall(url) {
@@ -104,16 +102,17 @@ function activateRemoveButtons() { // obj is expected to be .container
 };
 
 function removeEntry(obj) { // obj is expected to be .btn-remove node
-    console.log(obj);
     const parent_node = obj.parentNode.parentNode;
+    const obj_id = parent_node.dataset.db_id;
     
-
-    // $.ajax({
-    //     url: `/api/destination/delete/${parent_node.dataset.db_id}`,
-    //     type: 'DELETE',
-    // }).done(() => {
-    //     () => console.log(`${parent_node.dataset.db_id} deleted from database.`);
-    // });
+    fetch('/api/destination/delete/' + obj_id, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedField),
+      })
+        .then((response) => response.json());
 
     parent_node.remove();
 };
