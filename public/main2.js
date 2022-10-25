@@ -43,27 +43,24 @@ function addEventListeners() {
 
 function activateEditButtons() { // obj is expected to be .container
     const editBtns = document.querySelectorAll(".btn-edit");
-    const buttonClassPrefix = "btn-edit"
+    const buttonClassPrefix = "btn-edit-"
     let property;
 
      editBtns.forEach(button => {
-        //console.log(button.classList.contains("btn-edit-destination"));
-        if (button.classList.contains("btn-edit-destination")) {
+        if (button.classList.contains(buttonClassPrefix + "destination")) {
             property = "destination";
-        } else if (button.classList.contains("btn-edit-location")) {
+        } else if (button.classList.contains(buttonClassPrefix +"location")) {
             property = "location";
         } else { // description
             property = "description";
         };
-        button.addEventListener('click', (e) => editContents(e, property), false)
+        button.addEventListener('click', (e, property) => editContents(e, property), false)
     });
 };
 
 // edit post
 function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
-
-    console.log(property);
 
     // const declaration
     obj = obj.target;
