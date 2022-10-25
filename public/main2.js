@@ -47,10 +47,10 @@ function activateEditButtons() { // obj is expected to be .container
     let property;
 
     editBtns.forEach(button => {
-        console.log(button.classList.contains(buttonClassPrefix));
-        if (button.classList.contains(buttonClassPrefix + "destination")) {
+        console.log(button.classList.contains("btn-edit-"));
+        if (button.classList.contains("btn-edit-" + "destination")) {
             property = "destination";
-        } else if (button.classList.contains(buttonClassPrefix + "location")) {
+        } else if (button.classList.contains("btn-edit-" + "location")) {
             property = "location";
         } else { // description
             property = "description";
