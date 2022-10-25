@@ -43,14 +43,14 @@ function addEventListeners() {
 
 function activateEditButtons() { // obj is expected to be .container
     const editBtns = document.querySelectorAll(".btn-edit");
-    const buttonClassPrefix = "btn-edit-"
+    const buttonClassPrefix = "btn-edit"
     let property;
 
     editBtns.forEach(button => {
         console.log(button.classList.contains("btn-edit-"));
-        if (button.classList.contains("btn-edit-" + "destination")) {
+        if (button.classList.contains("btn-edit-destination")) {
             property = "destination";
-        } else if (button.classList.contains("btn-edit-" + "location")) {
+        } else if (button.classList.contains("btn-edit-location")) {
             property = "location";
         } else { // description
             property = "description";
