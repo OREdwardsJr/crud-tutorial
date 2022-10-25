@@ -13,8 +13,8 @@ function loadImgs() {
     });
 };
 
-function loadImg(obj, overrideDefault=false) { // obj should be the parent ".container" node
-    const searchKey = obj.children[1].children[0].children[0].textContent; // #destination.textContent
+function loadImg(obj, overrideDefault=false, description=null) { // obj should be the parent ".container" node
+    let searchKey = description || obj.children[1].children[0].children[0].textContent; // #destination.textContent
 
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
     //const url = "";
@@ -91,8 +91,8 @@ function editContents(obj) { // obj is expected to be .btn-edit
             };
         });
     
-    if (property === 'destination') loadImg(obj_container, true);
-    };
+    if (property === 'destination') loadImg(obj_container, true, updatedContent);
+};
  
 function activateRemoveButtons() { // obj is expected to be .container
     const removeBtns = document.querySelectorAll(".btn-remove");
