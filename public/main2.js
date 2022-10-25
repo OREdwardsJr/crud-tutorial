@@ -1,4 +1,3 @@
-// const { Destination } = require("../models");
 const KEY = "9F6mguTnJtDRAlfzGfzrDcZN_rRWYq3-Y9f6-obW80Y";
 
 // Start app
@@ -57,10 +56,9 @@ function activateEditButtons() { // obj is expected to be .container
 function editContents(obj) { // obj is expected to be .btn-edit
     obj.preventDefault();
     
-    const objTarget = obj.target;
-
     let property;
 
+    const objTarget = obj.target;
     const obj_container = objTarget.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
@@ -115,61 +113,3 @@ function removeEntry(obj) { // obj is expected to be .btn-remove node
 
     parent_node.remove();
 };
-
-// vvv CAN MOST LIKELY BE DELETED vvv
-
-// function displayPost(postObj) {
-//     // declare variables
-//     const post = JSON.parse(postObj);
-//     const postsDiv = document.querySelector("#posts-content");
-//     const containersDiv = createDiv();
-//     const imageSectionDiv = createDiv();
-//     const imageInfo = createDiv();
-//     const titleDiv = document.createElement("h1");
-//     const locationDiv = document.createElement("h3");
-//     const contentPara = document.createElement("p");
-//     const buttonsDiv = createDiv();
-//     const editBtn = document.createElement("button");
-//     const removeBtn = document.createElement("button");
-
-//     // add class
-//     containersDiv.classList.add("containers");
-//     imageSectionDiv.classList.add("image-section");
-//     imageInfo.classList.add("image-info");
-//     buttonsDiv.classList.add("img-btns");
-//     editBtn.classList.add("btn-edit");
-//     removeBtn.classList.add("btn-remove");
-            
-//     // change textContent
-//     titleDiv.textContent = post.title;
-//     locationDiv.textContent = post.dest_location;
-//     contentPara.textContent = post.description;
-//     editBtn.textContent = "Edit";
-//     removeBtn.textContent = "Remove";
-
-//     // add id
-//     containersDiv.id = "container-" + post.post_id;
-
-//     // appendChild
-//     buttonsDiv.appendChild(editBtn);
-//     buttonsDiv.appendChild(removeBtn);
-//     imageInfo.appendChild(titleDiv);
-//     imageInfo.appendChild(locationDiv);
-//     imageInfo.appendChild(contentPara);
-//     imageInfo.appendChild(buttonsDiv);
-//     containersDiv.appendChild(imageSectionDiv);
-//     containersDiv.appendChild(imageInfo);
-//     postsDiv.appendChild(containersDiv);
-
-//     // add eventListener
-//     // editBtn.addEventListener('click', (e) => editContents(e.target))
-//     removeBtn.addEventListener('click', (e) => removeEntry(e.target))
-
-//     // function calls
-//     loadImg(imageSectionDiv, post.title, true);
-// }
-
-// Helper Functions
-// function createDiv() {
-//     return document.createElement("div");
-// }

@@ -14,7 +14,6 @@ const createDestination = async (req, res) => {
 
   const destination = new Destination(payload);
   
-
   if (!destination) {
     return res.status(400).json({
       success: false,
