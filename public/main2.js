@@ -66,9 +66,9 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
     const obj_container = obj.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
-    const data = {};
+    const updatedField = {};
 
-    data[property] = updatedContent;
+    updatedField[property] = updatedContent;
     console.log(data);
     
     fetch('/api/destination/update/' + obj_id, {
@@ -76,12 +76,12 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ description: "hard-coded" }),
+        body: JSON.stringify(updatedField),
       })
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
-                console.log(data);
+                console.log(updatedField);
                 obj.previousElementSibling.textContent = updatedContent;
             }
         });
