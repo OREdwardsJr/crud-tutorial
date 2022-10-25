@@ -71,6 +71,8 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
 
     updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
     
+    console.log(updatedField);
+
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
         headers: {
