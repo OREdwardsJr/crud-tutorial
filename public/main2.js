@@ -83,7 +83,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         .then((data) => {
             if (!!data) {
                 //obj.previousElementSibling.textContent = updatedContent;
-                location.reload();
+                //location.reload();
             }
         });
     };
