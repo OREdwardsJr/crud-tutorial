@@ -14,7 +14,6 @@ const createDestination = async (req, res) => {
 
   const destination = new Destination(payload);
   
-
   if (!destination) {
     return res.status(400).json({
       success: false,
@@ -67,7 +66,7 @@ const getDestination = async (req, res) => {
     if (error) {
       return res.status(400).json({
         error,
-        success: fail,
+        success: false,
       });
     }
 
@@ -84,7 +83,7 @@ const deleteDestination = (req, res) => {
     if (error) {
       return res.status(400).json({
         error,
-        success: true,
+        success: false,
       });
     }
 
@@ -92,7 +91,6 @@ const deleteDestination = (req, res) => {
       success: true,
     });
   });
-  
 };
 
 // UPDATE DESTINATION BY ID
@@ -105,7 +103,7 @@ const updateDestination = (req, res) => {
       message: "Please enter desired updates",
       success: false,
     });
-  }
+  };
 
   Destination.findByIdAndUpdate(searchKey, payload, (error) => {
     if (error) {
@@ -113,7 +111,8 @@ const updateDestination = (req, res) => {
         error,
         success: false,
       });
-    }
+    };
+    
     return res.status(200).json({
       success: true,
       message: "Payload updated."
