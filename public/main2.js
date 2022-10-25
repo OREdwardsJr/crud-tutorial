@@ -75,7 +75,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data }),
+        body: JSON.stringify({ description: "hard-coded" }),
       })
         .then((response) => response.json())
         .then((data) => {
