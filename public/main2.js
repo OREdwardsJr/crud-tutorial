@@ -19,14 +19,14 @@ function loadImg(obj) { // obj should be the parent ".container" node
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
     //const url = "";
 
-    // unsplashAPICall(url).then(data => {
-    //     let img_result = data.urls.thumb;
-    //     let image_element = document.createElement('img');
+    unsplashAPICall(url).then(data => {
+        let img_result = data.urls.thumb;
+        let image_element = document.createElement('img');
         
-    //     image_element.src = img_result;
+        image_element.src = img_result;
 
-    //     obj.children[0].appendChild(image_element);
-    // });
+        obj.children[0].appendChild(image_element);
+    });
 
     // inner functions
     async function unsplashAPICall(url) {
@@ -61,14 +61,15 @@ function activateEditButtons() { // obj is expected to be .container
 // edit post
 function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
+
     // const declaration
     obj = obj.target;
     const obj_container = obj.parentNode.parentNode.parentNode; 
     const obj_id = obj_container.dataset.db_id; // this doesn't work with IE versions earlier than IE 11. Would need to change to account for that
     const updatedContent = prompt("Enter desired update");
-    const updatedField = {};
+    const updatedField = { };
 
-    updatedField[property] = updatedContent;
+    updatedField[property] = updatedContent; // ES6 only allows you to use variables as keys in this manner
     
     fetch('/api/destination/update/' + obj_id, {
         method: 'PUT',
@@ -80,10 +81,11 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         .then((response) => response.json())
         .then((data) => {
             if (!!data) {
-                console.log(updatedField);
                 obj.previousElementSibling.textContent = updatedContent;
-            }
+            };
         });
+    
+    if (property == 'destination') loadImg(obj_container);
     };
  
 function activateRemoveButtons() { // obj is expected to be .container
