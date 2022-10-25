@@ -55,7 +55,6 @@ function activateEditButtons() { // obj is expected to be .container
         } else { // description
             property = "description";
         };
-        console.log(property);
         button.addEventListener('click', (e) => editContents(e, property), false)
     });
 };
@@ -63,6 +62,8 @@ function activateEditButtons() { // obj is expected to be .container
 // edit post
 function editContents(obj, property) { // obj is expected to be .btn-edit
     obj.preventDefault();
+
+    console.log(property);
 
     // const declaration
     obj = obj.target;
