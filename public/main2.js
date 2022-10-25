@@ -110,7 +110,6 @@ function removeEntry(obj) { // obj is expected to be .btn-remove node
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedField),
       })
         .then((response) => response.json());
 
