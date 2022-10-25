@@ -54,7 +54,7 @@ function activateEditButtons() { // obj is expected to be .container
         } else { // description
             property = "description";
         };
-        button.addEventListener('click', (e, property) => editContents(e, property), false)
+        button.addEventListener('click', (e) => editContents(e, property), false)
     });
 };
 
