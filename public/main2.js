@@ -70,7 +70,7 @@ function editContents(obj, property) { // obj is expected to be .btn-edit
         property: updatedContent
     };
 
-    
+    console.log(data, propery, updatedContent);
     
     fetch(`/api/destination/update/${obj_id}`, {
         method: 'PUT',
