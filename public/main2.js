@@ -15,6 +15,7 @@ function loadImgs() {
 
 function loadImg(obj, overrideDefault=false, description=null) { // obj should be the parent ".container" node
     let searchKey = description || obj.children[1].children[0].children[0].textContent; // #destination.textContent
+    console.log(searchKey);
 
     const url = `https://api.unsplash.com/photos/random?query=${searchKey}&per_page=50&page=1&client_id=${KEY}`;
     //const url = "";
