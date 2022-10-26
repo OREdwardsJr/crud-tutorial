@@ -14,7 +14,7 @@ app.use('/api', DestinationRoutes);
 app.use(express.static("public"));
 
 app.get('/', (req, res) => {
-     db.db.collection('wishlists')
+     db.collection('wishlists')
      .find().toArray()
      .then(results => {
         res.render(__dirname + '/public/index.ejs', { wishlists: results });

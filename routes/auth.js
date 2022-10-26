@@ -5,22 +5,22 @@ var crypto = require('crypto');
 var db = require('../db/users');
 var router = express.Router();
 
-passport.use(new LocalStrategy(function verify(username, password, cb) {
-  // REPLACE WITH MONGOOSE EQUIVALENCE
-  db.db.findOne( { username }, function(err, row) {
-    if (err) { return cb(err); }
-    if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
-  // REPLACE WITH MONGOOSE EQUIVALENCE
+// passport.use(new LocalStrategy(function verify(username, password, cb) {
+//   // REPLACE WITH MONGOOSE EQUIVALENCE
+//   db.findOne( { username }, function(err, row) {
+//     if (err) { return cb(err); }
+//     if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+//   // REPLACE WITH MONGOOSE EQUIVALENCE
 
-    crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-      if (err) { return cb(err); }
-      if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-        return cb(null, false, { message: 'Incorrect username or password.' });
-      }
-      return cb(null, row);
-    });
-  });
-}));
+//     crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+//       if (err) { return cb(err); }
+//       if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
+//         return cb(null, false, { message: 'Incorrect username or password.' });
+//       }
+//       return cb(null, row);
+//     });
+//   });
+// }));
 
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
@@ -58,7 +58,7 @@ router.post('/signup', function(req, res, next) {
   var salt = crypto.randomBytes(16);
   crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
     if (err) { return next(err); }
-    db.db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
+    db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?, ?, ?)', [
       req.body.username,
       hashedPassword,
       salt
