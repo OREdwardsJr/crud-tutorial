@@ -1,4 +1,4 @@
-const { Destination } = require("../models").schema; // this is an import. it's bringing Destination from models
+const { Destination } = require("../models"); // this is an import. it's bringing Destination from models
 
 // CREATE DESTINATION
 const createDestination = async (req, res) => {
