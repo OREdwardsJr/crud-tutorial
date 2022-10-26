@@ -34,9 +34,9 @@ var passport = require('passport');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-// router.get('/login', function(req, res, next) {
-//   res.render('login');
-// });
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
 
 // app.use('/', authIndexRouter);
 // app.use('/', authRouter);
