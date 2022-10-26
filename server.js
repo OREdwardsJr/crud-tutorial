@@ -27,8 +27,8 @@ app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
 // PASSWORD.JS features
 var router = express.Router();
 
-// var authIndexRouter = require('./routes/signin');
-// var authRouter = require('./routes/auth');
+var authIndexRouter = require('./routes/signin');
+var authRouter = require('./routes/auth');
 
 // var passport = require('passport');
 // var session = require('express-session');
