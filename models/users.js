@@ -6,4 +6,4 @@ const UserSchema = new Schema({
     password: String,
 });
 
-module.exports = mongoose.model("Wishlists-Users", UserSchema);
+module.exports = mongoose.model("Wishlists", UserSchema);

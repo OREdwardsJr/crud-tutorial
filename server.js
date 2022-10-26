@@ -45,7 +45,7 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(passport.authenticate('session'));
 
