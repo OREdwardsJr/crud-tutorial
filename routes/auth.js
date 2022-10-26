@@ -5,6 +5,8 @@ var crypto = require('crypto');
 var db = require('../db');
 var router = express.Router();
 
+const app = express();
+
 // passport.use(new LocalStrategy(function verify(username, password, cb) {
 //   // REPLACE WITH MONGOOSE EQUIVALENCE
 //   db.findOne( { username }, function(err, row) {
@@ -21,6 +23,7 @@ var router = express.Router();
 //     });
 //   });
 // }));
+
 
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
