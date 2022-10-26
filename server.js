@@ -48,6 +48,6 @@ app.use(session({
   store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 
-// app.use(passport.authenticate('session'));
+app.use(passport.authenticate('session'));
 
 module.exports = router;
