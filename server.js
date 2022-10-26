@@ -38,8 +38,8 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-// app.use('/', authIndexRouter);
-// app.use('/', authRouter);
+app.use('/', authIndexRouter);
+app.use('/', authRouter);
 
 // app.use(session({
 //   secret: 'keyboard cat',
