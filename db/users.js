@@ -8,8 +8,8 @@ const conn = mongoose.createConnection(
     useUnifiedTopology: true,
     dbName: 'wishlists-users'
   })
-  .then(() => console.log('database connected'))
-  .catch(e => console.error("Database not connected: ", e));
+  // .then(() => console.log('database connected'))
+  // .catch(e => console.error("Database not connected: ", e));
 
 conn.model('Users', require('../models/users'));
 

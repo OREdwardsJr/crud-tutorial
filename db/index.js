@@ -7,9 +7,9 @@ const conn = mongoose.createConnection(
       useNewUrlParser: true,
       useUnifiedTopology: true,
       dbName: 'wishlists'
-  })
-  .then(() => {console.log('database connected')})
-  .catch(e => console.error("Database not connected: ", e));
+  });
+  // .then(() => {console.log('database connected')})
+  // .catch(e => console.error("Database not connected: ", e));
 
 conn.model('Wishlists', require('../models/index'));
 
