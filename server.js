@@ -31,7 +31,7 @@ var authIndexRouter = require('./routes/signin');
 var authRouter = require('./routes/auth');
 
 var passport = require('passport');
-// var session = require('express-session');
+var session = require('express-session');
 // var SQLiteStore = require('connect-sqlite3')(session);
 
 // router.get('/login', function(req, res, next) {
