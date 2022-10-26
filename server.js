@@ -29,7 +29,7 @@ let router = express.Router();
 let passport = require('passport');
 let session = require('express-session');
 let cookieParser = require('cookie-parser');
-let userRoutes = require('./routes/user');
+let userRoutes = require('./routes/auth');
 
 app.use(session({
   secret: 'keyboard cat',
