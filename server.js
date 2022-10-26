@@ -27,8 +27,8 @@ app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
 // PASSWORD.JS features
 var router = express.Router();
 
-// var authIndexRouter = require('./routes/signin');
-// var authRouter = require('./routes/auth');
+var authIndexRouter = require('./routes/signin');
+var authRouter = require('./routes/auth');
 
 var passport = require('passport');
 var session = require('express-session');
@@ -38,14 +38,14 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-// app.use('/', authIndexRouter);
-// app.use('/', authRouter);
+app.use('/', authIndexRouter);
+app.use('/', authRouter);
 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+  //store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 
 app.use(passport.authenticate('session'));
