@@ -7,11 +7,18 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Vacation Destinations</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/styles.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -23,15 +30,62 @@
                     <h1 id="title">
                         Vacation Destinations WishList
                     </h1>
-                    <a href="/login.ejs">
-                        <button style="width: 15vw; height: 10vh;">Log in</button>
-                    </a>
+                    
                     <h5 id="title-tag">
                         Found exciting places to visit on your next vacation? Use the form below to add them to your wishlist.
                     </h5>
                 </div>
+                <% if (!authenticated) { %>
+                    <!-- BOOSTRAP LOGIN FORM -->
+                    <form
+                        id="form-login"
+                        method="post"
+                        action="/api/login"
+                        style="margin-right: 2vw;">
+                        <div class="form-row align-items-center" style="display: flex; gap: 2vw;">
+                        <div class="col-sm-3 my-1">
+                            <label class="sr-only" for="inlineFormInputName">Username</label>
+                            <input type="text" class="form-control" id="inlineFormInputName" placeholder="Usernamee" name="username">
+                        </div>
+                        <div class="col-sm-3 my-1">
+                            <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Password" name="password">
+                            </div>
+                        </div>
+                        <div class="col-auto my-1">
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
+                            <label class="form-check-label" for="autoSizingCheck2">
+                                Remember me
+                            </label>
+                            </div>
+                        </div>
+                        <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        </div>
+                    </form>
+                    <form 
+                    method="post"
+                    action="/api/register"
+                    >
+                    <button type="submit">Register</button>
+                    </form>
+                    <!-- BOOSTRAP LOGIN FORM -->
+                <% } else { %>
+                    <div id="welcome-user">
+                        <h3>Hello, <%=username %></h3>
+                        <form 
+                        method="get"
+                        action="/api/logout">
+                            <button type="submit" id="btn-logout"> Log Out </button>
+                        </form>
+                    </div>
+                <% } %>
             </div>
-
             <div id="main-section">
                 <div id="form-body">
                     <div id="content">
@@ -60,7 +114,7 @@
                     </div>
                     <div id="posts-content">
                         <% let post_id = 0 %>
-                        <% wishlists.forEach(function(wishlist) { %>
+                        <% destinations.forEach(function(wishlist) { %>
                             <div class="containers" data-db_id=<%= wishlist._id %> >
                                 <div class="image-section">
                                     <!--JS loads images-->

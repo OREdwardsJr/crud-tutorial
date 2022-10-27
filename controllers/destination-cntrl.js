@@ -1,4 +1,4 @@
-const { Destination } = require("../models"); // this is an import. it's bringing Destination from models
+const { Destination, Authenticate } = require("../models"); // this is an import. it's bringing Destination from models
 
 // CREATE DESTINATION
 const createDestination = async (req, res) => {
@@ -21,9 +21,43 @@ const createDestination = async (req, res) => {
     });
   }
 
-  await destination
+  // await destination
+  //   .save()
+  //   .then(() => {
+  //     return res.redirect('/');
+      
+  //     // return res.status(201).json({
+        
+  //     //   success: true,
+  //     //   id: destination._id,
+  //     //   message: "Destination created",
+  //     // })
+  //   })
+  //   .catch((e) => {
+  //     return res.status(400).json({
+  //       e,
+  //       message: "Destination not created"
+  //     });
+  //   });
+
+  //attempting to populate user (Authenticate) with newly created destination
+    await destination
     .save()
-    .then(() => {
+    .then(async () => {
+       await Authenticate
+      .updateOne( 
+        { username: req.user.username },
+        { $push: { destinations: destination }},
+        { new: true } // returns the updated document
+      )
+      // .populate('destinations')
+      // .exec( (err, destination) => {
+      //   if (err) return handleError(err);
+      //   console.log('The destination is ' + destination);
+      // })
+      let user = await Authenticate.findOne( {username: req.user.username })
+      console.log(user);
+      // user.save();
       return res.redirect('/');
       
       // return res.status(201).json({
@@ -34,9 +68,10 @@ const createDestination = async (req, res) => {
       // })
     })
     .catch((e) => {
+      console.log(req.user.username)
       return res.status(400).json({
         e,
-        message: "Destination not created",
+        message: "Destination not created"
       });
     });
 };

@@ -7,4 +7,4 @@ const DestinationSchema = new Schema({
     description: String 
 });
 
-module.exports = mongoose.model("Wishlist", DestinationSchema); // what goes into the database, model
+module.exports = mongoose.model("Destinations", DestinationSchema); // what goes into the database, model

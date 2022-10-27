@@ -1,12 +1,13 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
+
 const conn = mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://https://vacation-wishlist.herokuapp.com//wishlist',
+  process.env.DATABASE_API, // process.env.HEROKU_STRING
   {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: 'wishlists'
+      dbName: 'wishlists' // might need to bring this back lolidk
   })
   .then(() => {console.log('database connected')})
   .catch(e => console.error("Database not connected: ", e));
