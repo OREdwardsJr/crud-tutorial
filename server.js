@@ -60,7 +60,8 @@ app.get('/', (req, res) => {
   };
 });
 
-app.post('/api/login', passport.authenticate('local', { failureRedirect: '/failed' }), (req, res) => {
+/* TODO - thouch this up */
+app.post('/api/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
   res.redirect('/');
 });
 

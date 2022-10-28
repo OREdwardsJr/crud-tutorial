@@ -56,7 +56,6 @@ const createDestination = async (req, res) => {
       //   console.log('The destination is ' + destination);
       // })
       let user = await Authenticate.findOne( {username: req.user.username })
-      console.log(user);
       // user.save();
       return res.redirect('/');
       
@@ -68,7 +67,6 @@ const createDestination = async (req, res) => {
       // })
     })
     .catch((e) => {
-      console.log(req.user.username)
       return res.status(400).json({
         e,
         message: "Destination not created"

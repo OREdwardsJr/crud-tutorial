@@ -9,6 +9,10 @@ const attemptLogin = (req, res) => {
         failureRedirect: "/login"
 })};
 
+const loadRegistration = (req, res) => {
+    res.render('../public/signup.ejs')
+}
+
 const registerUser = async (req, res) => {
     const payload = req.body;
 
@@ -19,8 +23,8 @@ const registerUser = async (req, res) => {
         });
     };
 
-    const authentication = Authenticate.register({username: payload.username}, payload.password);
-    console.log(payload);
+    const authentication = Authenticate.register({username: payload.username, email: payload.email}, payload.password);
+
     if (!authentication) {
         return res.status(400).json({
             success: false,
@@ -30,11 +34,10 @@ const registerUser = async (req, res) => {
 
     await authentication
         .then(() => {
-            return res.status(201).json({
-                success: true,
-                message: "User created!"
-            });
-        })
+            passport.authenticate("local")(req, res, () => {
+                return res.redirect('/');
+            })
+            })
         .catch((e) => {
             return res.status(400).json({
                 e,
@@ -74,6 +77,7 @@ passport.deserializeUser(Authenticate.deserializeUser());
 
 module.exports = {
     attemptLogin,
+    loadRegistration,
     registerUser,
     logoutUser,
     getUsers
