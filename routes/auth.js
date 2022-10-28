@@ -3,7 +3,6 @@ const router = express.Router();
 const { registerUser, logoutUser, getUsers } = require("./../controllers/auth-cntrl");
 const connectEnsureLogin = require('connect-ensure-login'); //authorization
 
-
 // login
 //router.post('/login', attemptLogin);
 
@@ -20,7 +19,5 @@ router.get('/users', getUsers)
 router.get('/secret', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     res.sendFile(__dirname + '/public/secret.html')
 })
-
-
 
 module.exports = router;
