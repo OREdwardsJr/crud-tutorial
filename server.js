@@ -1,6 +1,8 @@
+require("dotenv").config();
+
 const express = require('express');
 const app = express(); // server software
-const PORT = process.env.PORT || 27017;
+const PORT = process.env.PORT;
 const db = require('./db/index');
 const { DestinationRoutes } = require("./routes");  
 const { AuthRoutes } = require('./routes');
@@ -8,12 +10,8 @@ const bodyParser = require('body-parser'); // parser middleware
 let router = express.Router();
 let passport = require('passport'); // authentication
 let session = require('express-session');  // session middleware
-//let cookieParser = require('cookie-parser');
 const { v4: uuidv4 } = require('uuid');
-const connectEnsureLogin = require('connect-ensure-login'); //authorization
-const { Authenticate } = require('./models')
-var MongoStore = require('connect-mongo');
-
+const { Authenticate } = require('./models');
 
 app.use(session({
   genid: function (req) {
@@ -22,8 +20,7 @@ app.use(session({
   secret: 'r8q,+&1LM3)CD*zAGpx1xm{NeQhc;#',
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 },
-  //store: new MongoStore({ mongooseConnection: mongoose.connection })
+  cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
 //app.use(cookieParser());
@@ -44,31 +41,34 @@ app.use('/api', AuthRoutes);
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
       res.locals.user = req.user.username;
-      db.collection('destinations')
-      .find().toArray()
-      .then(results => {
-          res.render(__dirname + '/public/index.ejs', { 
-            destinations: results,
-            username: req.user.username, 
-            authenticated: true });
-      })
-      .catch(error => console.log(error));
+
+      Authenticate.findOne( {username: res.locals.user}, 'destinations',
+         (err, user) => {
+            db.collection('destinations')
+            .find( { _id: { $in: user.destinations } } )
+            .toArray()
+            .then( results => {
+              res.render(__dirname + '/public/index.ejs', { 
+                destinations: results,
+                username: req.user.username, 
+                authenticated: true })
+            })
+            .catch( e => console.log(e));
+          });
   } else {
     res.render(__dirname + '/public/index.ejs', { destinations: [], authenticated: false});
-  }
+  };
 });
 
 app.post('/api/login', passport.authenticate('local', { failureRedirect: '/failed' }), (req, res) => {
   res.redirect('/');
 });
 
-//passport.use(new LocalStrategy(Authenticate.authenticate()));
 passport.use(Authenticate.createStrategy()); // allows us to not have to implement logic for finding user in table
 // To use with sessions
 passport.serializeUser(Authenticate.serializeUser());
 passport.deserializeUser(Authenticate.deserializeUser());
 
-//require('./routes/auth')(app, passport);
 app.listen(PORT, () => console.log(`Listening on Port ${PORT}`));
 
 module.exports = router;
