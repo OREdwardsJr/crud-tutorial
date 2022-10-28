@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const conn = mongoose.connect(
-  process.env.DATABASE_API, // process.env.HEROKU_STRING
+   process.env.HEROKU_STRING, // process.env.DATABASE_API,
   {
       useNewUrlParser: true,
       useUnifiedTopology: true,
