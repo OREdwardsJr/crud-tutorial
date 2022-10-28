@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, logoutUser, getUsers } = require("./../controllers/auth-cntrl");
+const { loadRegistration, logoutUser, getUsers, registerUser } = require("./../controllers/auth-cntrl");
 const connectEnsureLogin = require('connect-ensure-login'); //authorization
 
 // login
 //router.post('/login', attemptLogin);
 
-// signup
-router.post('/register', registerUser)
+// go to register page
+router.get('/register', loadRegistration)
+
+// submit registration
+router.post('/register/attempt', registerUser)
 
 // logout
 router.get('/logout', logoutUser)

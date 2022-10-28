@@ -25,7 +25,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id="landing-content">
-            <div id="title-section">
+            <div id="title-section" style="padding-right: 2vw;">
                 <div id="title-text-body">
                     <h1 id="title">
                         Vacation Destinations WishList
@@ -69,15 +69,15 @@
                         </div>
                     </form>
                     <form 
-                    method="post"
+                    method="get"
                     action="/api/register"
                     >
                     <button type="submit">Register</button>
                     </form>
                     <!-- BOOSTRAP LOGIN FORM -->
                 <% } else { %>
-                    <div id="welcome-user">
-                        <h3>Hello, <%=username %></h3>
+                    <div id="welcome-user" style="display: flex; width: 15vw; align-items: center; gap: 1vw;">
+                        <h5>Hello, <%=username %></h5>
                         <form 
                         method="get"
                         action="/api/logout">
