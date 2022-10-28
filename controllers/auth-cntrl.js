@@ -11,7 +11,7 @@ const attemptLogin = (req, res) => {
 
 const loadRegistration = (req, res) => {
     res.render('../public/signup.ejs')
-}
+};
 
 const registerUser = async (req, res) => {
     const payload = req.body;
@@ -53,6 +53,14 @@ const logoutUser = (req, res) => {
     });
 };
 
+const getProfile = (req, res) => {
+    res.render('../public/profile.ejs');
+}
+
+const deleteProfile = (req, res) => {
+
+}
+
 const getUsers = async (req, res) => {
     await Authenticate.find({}, (error, destination) => {
         if (error) {
@@ -80,5 +88,7 @@ module.exports = {
     loadRegistration,
     registerUser,
     logoutUser,
-    getUsers
+    getUsers,
+    getProfile,
+    deleteProfile
 }

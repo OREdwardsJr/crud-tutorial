@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { loadRegistration, logoutUser, getUsers, registerUser } = require("./../controllers/auth-cntrl");
+const { loadRegistration, logoutUser, getUsers, registerUser, getProfile } = require("./../controllers/auth-cntrl");
 const connectEnsureLogin = require('connect-ensure-login'); //authorization
 
 // login
@@ -14,6 +14,9 @@ router.post('/register/attempt', registerUser)
 
 // logout
 router.get('/logout', logoutUser)
+
+// get user profile
+router.get('/profile', connectEnsureLogin.ensureLoggedIn(), getProfile)
 
 // get all users
 router.get('/users', getUsers)

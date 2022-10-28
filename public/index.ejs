@@ -27,11 +27,11 @@
         <div id="landing-content">
             <div id="title-section" style="padding-right: 2vw;">
                 <div id="title-text-body">
-                    <h1 id="title">
+                    <h1 id="title" style="overflow: hidden;">
                         Vacation Destinations WishList
                     </h1>
                     
-                    <h5 id="title-tag">
+                    <h5 id="title-tag" style="overflow: hidden;">
                         Found exciting places to visit on your next vacation? Use the form below to add them to your wishlist.
                     </h5>
                 </div>
@@ -83,6 +83,11 @@
                         action="/api/logout">
                             <button type="submit" id="btn-logout"> Log Out </button>
                         </form>
+                        <form 
+                        method="get"
+                        action="/api/profile">
+                            <button type="submit" id="btn-logout"> Profile </button>
+                        </form>
                     </div>
                 <% } %>
             </div>
@@ -125,19 +130,19 @@
                                  method="PUT"
                                  action="/api/destination/update">
                                     <div class="text-post-content">
-                                        <h1 id="destination"><%= wishlist.destination %></h1>
+                                        <h3 id="destination" style="overflow: hidden;"><%= wishlist.destination %></h3>
                                         <button class="btn-edit btn-edit-destination fa fa-pencil"></button>
                                     </div>
                                     <div class="text-post-content">
-                                        <h3 id="location"><%= wishlist.location %></h3>
+                                        <h3 id="location" style="overflow: hidden;"><%= wishlist.location %></h3>
                                         <button class="btn-edit btn-edit-location fa fa-pencil"></button>
                                     </div>
                                     <div class="text-post-content">
-                                        <p id="description"><%= wishlist.description %></p>
+                                        <p id="description" style="overflow: hidden;"><%= wishlist.description %></p>
                                         <button class="btn-edit btn-edit-description fa fa-pencil"></button>
                                     </div>
                                 </form>
-                                <div class="img-btns">
+                                <div class="img-btns" style="display: flex; justify-content: center;">
                                     <button class="btn-remove">Remove</button>
                                 </div>
                             </div>

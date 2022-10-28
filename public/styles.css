@@ -48,7 +48,7 @@
 
 #landing-content #main-section #display-main-content {
     display: grid;
-    grid-template-rows: 5% 95%;
+    grid-template-rows: 15% 85%;
 }
 
 #landing-content #main-section #display-main-content #title {
